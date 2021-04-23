@@ -40,13 +40,15 @@ def main(args):
     print("Connected!")
     time.sleep(1)
 
-    ser.write('\x01'.encode()) # start process
+    ser.write(b'\x00\x00') # start process
+    ser.write(b'\x01\x01') # start process
     print("Recording voltages")
 
     try:
         while True:
             bytes = ser.read(4 + 2) # 32-bit unsigned int + 16-bit int
             (t, v) = struct.unpack('Ih', bytes)
+            #print(t, v)
             time_l.append(t)
             voltage_l.append(v)
     except:
@@ -54,7 +56,7 @@ def main(args):
     finally:
         print(f"Dumping to {args.out}")
 
-        ser.write('\x00'.encode()) # stop process
+        ser.write(b'\x00\x00') # stop process
         with open(args.out, 'w') as csv_f:
             writer = csv.writer(csv_f, delimiter=',')
             for i, t in enumerate(time_l):

@@ -3,7 +3,7 @@
 int sensor_pin = A0;
 int value = 0;
 unsigned long time = 0;
-int do_send = 0;
+int do_send = 1;
 
 void setup() {
   Serial.begin(9600);
@@ -11,9 +11,10 @@ void setup() {
 }
 
 void loop() {
-  if (Serial.available() > 0) {
-    do_send = Serial.read();
+  if (Serial.available() >= sizeof(do_send)) {
+    Serial.readBytes((byte *)&do_send, sizeof(do_send));
     digitalWrite(LED_BUILTIN, LOW);
+    delay(1000);
   }
   if (do_send != 0) {
     digitalWrite(LED_BUILTIN, HIGH);
