@@ -52,13 +52,13 @@ def main(args):
     except:
         raise
     finally:
-        print(f"Dumping to args.out")
+        print(f"Dumping to {args.out}")
 
         ser.write('\x00'.encode()) # stop process
         with open(args.out, 'w') as csv_f:
             writer = csv.writer(csv_f, delimiter=',')
             for i, t in enumerate(time_l):
-                print(i, t)
+                #print(i, t)
                 writer.writerow((t, voltage_l[i]))
 
         #df = pd.DataFrame(data=d)
