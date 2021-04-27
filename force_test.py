@@ -48,7 +48,8 @@ def main(args):
         while True:
             bytes = ser.read(4 + 2) # 32-bit unsigned int + 16-bit int
             (t, v) = struct.unpack('Ih', bytes)
-            #print(t, v)
+            if not t % 1000:
+                print(t, v)
             time_l.append(t)
             voltage_l.append(v)
     except:
@@ -60,7 +61,6 @@ def main(args):
         with open(args.out, 'w') as csv_f:
             writer = csv.writer(csv_f, delimiter=',')
             for i, t in enumerate(time_l):
-                #print(i, t)
                 writer.writerow((t, voltage_l[i]))
 
         #df = pd.DataFrame(data=d)
