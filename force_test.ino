@@ -6,7 +6,7 @@ unsigned long time = 0;
 int do_send = 1;
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   pinMode(LED_BUILTIN, OUTPUT);
 }
 

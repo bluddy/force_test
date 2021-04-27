@@ -36,7 +36,7 @@ def main(args):
     time_l = []
     voltage_l = []
 
-    ser = serial.Serial(get_portname(), 9600)
+    ser = serial.Serial(get_portname(), 115200)
     print("Connected!")
     time.sleep(1)
 
